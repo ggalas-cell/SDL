@@ -1,6 +1,6 @@
 #include "Circle.h"
 
-void Draw(SDL_Renderer* renderer, int centerX, int centerY, int radius, int precision)
+void Circle::Draw(SDL_Renderer* renderer, int centerX, int centerY, int radius, int precision)
 {
 	float step = (2 * M_PI) / precision;
 	for (int i = 0; i <= precision; i++)

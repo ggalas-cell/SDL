@@ -1,5 +1,6 @@
 #include <SDL.h>
 #include <iostream>
+#include "Geometry.h"
 #include "function.h"	
 
 struct Color
@@ -76,7 +77,10 @@ void DrawLine(SDL_Renderer* renderer,int x ,int y, int x2, int y2)
 		y1 += stepy;
 	}
 }
-
+//#define WIDTH =640
+//#define HEIGHT = 480
+//#define CENTER_X = WIDTH / 2
+//#define CENTER_Y = HEIGHT / 2
 
 int main(int arcg, char* argv[])
 {
@@ -85,8 +89,11 @@ int main(int arcg, char* argv[])
 		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
 		return 1;
 	}
-
-	SDL_Window* window = SDL_CreateWindow("SDL", 100, 100, 640, 480, SDL_WINDOW_SHOWN);
+	int windx = 640;
+	int windy = 480;
+	int centerx = windx / 2;
+	int centery = windy / 2;
+	SDL_Window* window = SDL_CreateWindow("SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windx, windy, SDL_WINDOW_SHOWN);
 
 	if (!window)
 	{
@@ -95,6 +102,7 @@ int main(int arcg, char* argv[])
 		return 1;
 	}
 	SDL_Renderer* renderer = SDL_CreateRenderer(window,-1, 1);
+	Geometry* geometry;
 	//Color color = { 200,140,0,255 };
 	SDL_SetRenderDrawColor(renderer, 200, 140, 0, 255);
 	//DrawPoint(renderer,color);
@@ -103,6 +111,10 @@ int main(int arcg, char* argv[])
 	DrawRectangle(renderer,50,50,150,100);
 	DrawCircle(renderer, 200, 200, 200, 2000);
 	//DrawLine(renderer,200,100,400,300);
+
+	//geometry->SetPosition(centerx, centery, ax, int ay);
+
+
 	SDL_RenderPresent(renderer);
 	SDL_Delay(2000);
 	SDL_DestroyWindow(window);
