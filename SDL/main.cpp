@@ -2,9 +2,13 @@
 #include <iostream>
 #include "function.h"	
 
-void DrawPoint(SDL_Renderer* renderer)
+struct Color
 {
-	SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+	int r, g, b, a;
+};
+void DrawPoint(SDL_Renderer* renderer,const Color& color)
+{
+	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
 	for (int i = 0; i <= 200; i++)
 	{
 		for (int y = 0; y <= 200; y++)
@@ -35,21 +39,41 @@ void DrawVerticalLine(SDL_Renderer* renderer, int x, int y, int length)
 }
 void DrawRectangle(SDL_Renderer* renderer, int x, int y, int width, int heigth)
 {
-	int x;
-	int y;
-	
-	
-	SDL_RenderDrawLine(renderer, x, y, 1, 1);
+
+	SDL_RenderDrawLine(renderer, x, y, x + width, y);
+	SDL_RenderDrawLine(renderer, x + width, y, x + width, heigth + y);
+	SDL_RenderDrawLine(renderer, x, y, x, heigth + y);
+	SDL_RenderDrawLine(renderer, x, y+heigth, x + width, y + heigth);
 }
-void DrawLine(SDL_Renderer* renderer,int x ,int y, int length, int heigth)
+void DrawCircle(SDL_Renderer* renderer, int centerX, int centerY, int radius, int precision)
 {
-	int lx = 0;
-	int hy = 0;
-	int lengthx= lx++;
-	SDL_SetRenderDrawColor(renderer, 80, 255, 50, 255);
-	for (lengthx; lengthx <= length; lx++)
+	float step = (2 * M_PI) / precision;
+	for (int i = 0; i <= precision; i++)
 	{
-		SDL_RenderDrawPoint(renderer, lengthx, hy);
+		int x1= radius * cos(step*i)+centerX; 
+		int y1= radius * sin(step*i)+centerY;
+		int x2= radius * cos(step*i+1)+centerX;
+		int y2= radius * sin(step*i+1)+centerY;
+		SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
+	}
+}
+void DrawLine(SDL_Renderer* renderer,int x ,int y, int x2, int y2)
+{
+	int lx = x2-x;
+	int hy = y2-y;
+	int lengthx= abs(lx);
+	int heigthy = abs(hy);
+	int max = std::max(lengthx, heigthy);
+	float stepx = lx / (float)max;
+	float stepy = hy / (float)max;
+	float x1 = x;
+	float y1 = y;
+	for (int i=0; i <= max; ++i)
+	{
+		SDL_RenderDrawPoint(renderer, x1, y1);
+
+		x1 += stepx;
+		y1 += stepy;
 	}
 }
 
@@ -71,11 +95,13 @@ int main(int arcg, char* argv[])
 		return 1;
 	}
 	SDL_Renderer* renderer = SDL_CreateRenderer(window,-1, 1);
-	//DrawPoint(renderer);
+	//Color color = { 200,140,0,255 };
+	SDL_SetRenderDrawColor(renderer, 200, 140, 0, 255);
+	//DrawPoint(renderer,color);
 	//DrawHorizontalLine(renderer, 10, 10, 100);	
 	//DrawVerticalLine(renderer,50,50,200);
-	DrawRectangle(renderer,200,200,150,100);
-	
+	DrawRectangle(renderer,50,50,150,100);
+	DrawCircle(renderer, 200, 200, 200, 2000);
 	//DrawLine(renderer,200,100,400,300);
 	SDL_RenderPresent(renderer);
 	SDL_Delay(2000);
