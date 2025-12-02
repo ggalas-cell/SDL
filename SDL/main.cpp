@@ -35,7 +35,8 @@ void DrawVerticalLine(SDL_Renderer* renderer, int x, int y, int length)
 }
 void DrawRectangle(SDL_Renderer* renderer, int x, int y, int width, int heigth)
 {
-	
+	int x;
+	int y;
 	
 	
 	SDL_RenderDrawLine(renderer, x, y, 1, 1);
