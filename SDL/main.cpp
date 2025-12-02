@@ -33,14 +33,22 @@ void DrawVerticalLine(SDL_Renderer* renderer, int x, int y, int length)
 		SDL_RenderDrawPoint(renderer,x , lengthy);
 	}
 }
+void DrawRectangle(SDL_Renderer* renderer, int x, int y, int width, int heigth)
+{
+	
+	
+	
+	SDL_RenderDrawLine(renderer, x, y, 1, 1);
+}
 void DrawLine(SDL_Renderer* renderer,int x ,int y, int length, int heigth)
 {
 	int lx = 0;
 	int hy = 0;
+	int lengthx= lx++;
 	SDL_SetRenderDrawColor(renderer, 80, 255, 50, 255);
-	for (lx; lx <= length; lx++)
+	for (lengthx; lengthx <= length; lx++)
 	{
-		SDL_RenderDrawPoint(renderer, lx, hy);
+		SDL_RenderDrawPoint(renderer, lengthx, hy);
 	}
 }
 
@@ -65,9 +73,9 @@ int main(int arcg, char* argv[])
 	//DrawPoint(renderer);
 	//DrawHorizontalLine(renderer, 10, 10, 100);	
 	//DrawVerticalLine(renderer,50,50,200);
-	DrawLine(renderer,200,100,400,300);
-
-
+	DrawRectangle(renderer,200,200,150,100);
+	
+	//DrawLine(renderer,200,100,400,300);
 	SDL_RenderPresent(renderer);
 	SDL_Delay(2000);
 	SDL_DestroyWindow(window);
