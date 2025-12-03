@@ -1,8 +1,8 @@
 #include "Geometry.h"
 
-void Geometry::SetPosition(int x, int y, int ax, int ay)
+void Geometry::SetPosition(int x, int y, int anchorX, int anchorY)
 {
-	m_x = x - static_cast<int>(ax * m_width);
-	m_y = y - static_cast<int>(ax * m_width);
+	m_Posx = x - anchorX * m_width;
+	m_Posy = y - anchorY * m_height;	
 }
-Vector2 Geometry::GetPosition(float anchorX, float anchorY) { return Vector2(m_x+anchorX*m_width,m_y+anchorY*m_height); }
+Vector2 Geometry::GetPosition(float anchorX, float anchorY) { return Vector2(m_Posx+anchorX*m_width,m_Posy+anchorY*m_height); }

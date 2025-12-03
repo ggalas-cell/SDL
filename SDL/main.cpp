@@ -1,6 +1,8 @@
 #include <SDL.h>
 #include <iostream>
 #include "Geometry.h"
+#include "Rectangle.h"
+#include "Circle.h"
 #include "function.h"	
 
 struct Color
@@ -108,12 +110,13 @@ int main(int arcg, char* argv[])
 	//DrawPoint(renderer,color);
 	//DrawHorizontalLine(renderer, 10, 10, 100);	
 	//DrawVerticalLine(renderer,50,50,200);
-	DrawRectangle(renderer,50,50,150,100);
-	DrawCircle(renderer, 200, 200, 200, 2000);
+	//DrawRectangle(renderer,50,50,150,100);
+	//DrawCircle(renderer, 200, 200, 200, 2000);
 	//DrawLine(renderer,200,100,400,300);
 
-	//geometry->SetPosition(centerx, centery, ax, int ay);
-
+	Rectangle* rectangle= new Rectangle(100,100);
+	rectangle->SetPosition(windx, windy, 0.5f, 0.5f);
+	rectangle->Draw(renderer);
 
 	SDL_RenderPresent(renderer);
 	SDL_Delay(2000);

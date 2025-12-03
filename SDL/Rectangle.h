@@ -4,6 +4,6 @@ class Rectangle: public Geometry
 {
 public:	
 	Rectangle(int w, int h) : Geometry(w,h) { }
-	void Draw(SDL_Renderer* renderer, int x, int y, int width, int height);
+	void Draw(SDL_Renderer* renderer) override;
 };
 
