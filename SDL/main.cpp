@@ -50,13 +50,13 @@ void DrawRectangle(SDL_Renderer* renderer, int x, int y, int width, int heigth)
 }
 void DrawCircle(SDL_Renderer* renderer, int centerX, int centerY, int radius, int precision)
 {
-	float step = (2 * M_PI) / precision;
+	float step = (float)(2 * M_PI) / precision;
 	for (int i = 0; i <= precision; i++)
 	{
-		int x1= radius * cos(step*i)+centerX; 
-		int y1= radius * sin(step*i)+centerY;
-		int x2= radius * cos(step*i+1)+centerX;
-		int y2= radius * sin(step*i+1)+centerY;
+		int x1= radius * (int)cos(step*i)+centerX; 
+		int y1= radius * (int)sin(step*i)+centerY;
+		int x2= radius * (int)cos(step*i+1)+centerX;
+		int y2= radius * (int)sin(step*i+1)+centerY;
 		SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
 	}
 }
@@ -69,14 +69,14 @@ void DrawLine(SDL_Renderer* renderer,int x ,int y, int x2, int y2)
 	int max = std::max(lengthx, heigthy);
 	float stepx = lx / (float)max;
 	float stepy = hy / (float)max;
-	float x1 = x;
-	float y1 = y;
+	float x1 = (float)x;
+	float y1 = (float)y;
 	for (int i=0; i <= max; ++i)
 	{
 		SDL_RenderDrawPoint(renderer, x1, y1);
 
-		x1 += stepx;
-		y1 += stepy;
+		x1 += (int)stepx;
+		y1 += (int)stepy;
 	}
 }
 //#define WIDTH =640
@@ -91,11 +91,11 @@ int main(int arcg, char* argv[])
 		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
 		return 1;
 	}
-	int windx = 640;
-	int windy = 480;
+	int windx = 999;
+	int windy = 799;
 	int centerx = windx / 2;
 	int centery = windy / 2;
-	SDL_Window* window = SDL_CreateWindow("SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windx, windy, SDL_WINDOW_SHOWN);
+	SDL_Window* window = SDL_CreateWindow("SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 800, SDL_WINDOW_SHOWN);
 
 	if (!window)
 	{
@@ -103,21 +103,41 @@ int main(int arcg, char* argv[])
 		SDL_Quit();
 		return 1;
 	}
-	SDL_Renderer* renderer = SDL_CreateRenderer(window,-1, 1);
-	Geometry* geometry;
+	SDL_Renderer* renderer = SDL_CreateRenderer(window,-1, SDL_RENDERER_PRESENTVSYNC);
+	//Geometry* geometry;
 	//Color color = { 200,140,0,255 };
 	SDL_SetRenderDrawColor(renderer, 200, 140, 0, 255);
 	//DrawPoint(renderer,color);
 	//DrawHorizontalLine(renderer, 10, 10, 100);	
 	//DrawVerticalLine(renderer,50,50,200);
-	DrawRectangle(renderer,50,50,150,100);
+	//DrawRectangle(renderer,50,50,150,100);
 	//DrawCircle(renderer, 200, 200, 200, 2000);
 	//DrawLine(renderer,200,100,400,300);
 
-	//Rectangle* rectangle= new Rectangle(100,100);
-	//// Rectangle* rectangle2= new Rectangle(100,100);
-	//rectangle->SetPosition(windx, windy, 0.5f, 0.5f);
-	//rectangle->Draw(renderer);
+			// Rectangle : placement 
+	Rectangle* rectangle= new Rectangle(100,100);
+	Rectangle* rectangle2= new Rectangle(100,100);
+	Rectangle* rectangle3 = new Rectangle(100, 100);
+	Rectangle* rectangle4 = new Rectangle(100, 100);
+	Rectangle* rectangle5 = new Rectangle(100, 100);
+
+	rectangle->SetPosition(10, 10, 0.f, 0.f);
+	rectangle->Draw(renderer);
+
+	rectangle2->SetPosition(windx-10, 10, 1.f, 0.f);
+	rectangle2->Draw(renderer);
+
+	rectangle3->SetPosition(centerx, centery, 0.5f, 0.5f);
+	rectangle3->Draw(renderer);
+
+	rectangle4->SetPosition(10, windy-10, 0.f, 1.f);
+	rectangle4->Draw(renderer);
+
+	rectangle5->SetPosition(windx-10, windy-10, 1.f, 1.f);
+	rectangle5->Draw(renderer);
+
+			//Circle: placement
+	Circle* cir = new Circle()
 
 	SDL_RenderPresent(renderer);
 	SDL_Delay(2000);
