@@ -115,6 +115,7 @@ int main(int arcg, char* argv[])
 	//DrawLine(renderer,200,100,400,300);
 
 	Rectangle* rectangle= new Rectangle(100,100);
+	// Rectangle* rectangle2= new Rectangle(100,100);
 	rectangle->SetPosition(windx, windy, 0.5f, 0.5f);
 	rectangle->Draw(renderer);
 
