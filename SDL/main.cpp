@@ -60,6 +60,18 @@ void DrawCircle(SDL_Renderer* renderer, int centerX, int centerY, int radius, in
 		SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
 	}
 }
+//special circle
+//float step = (2 * M_PI) / m_height;
+//for (int i = 0; i <= m_height; i++)
+//{
+//	Vector2 center = GetPosition(0.5f, 0.5f);
+//
+//	int x1 = m_width * cos(step * i) + center.x;
+//	int y1 = m_width * sin(step * i) + center.y;
+//	int x2 = m_width * cos(step * i + 1) + center.x;
+//	int y2 = m_width * sin(step * i + 1) + center.y;
+//	SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
+//}
 void DrawLine(SDL_Renderer* renderer,int x ,int y, int x2, int y2)
 {
 	int lx = x2-x;
@@ -137,7 +149,21 @@ int main(int arcg, char* argv[])
 	rectangle5->Draw(renderer);
 
 			//Circle: placement
-	Circle* cir = new Circle()
+	Circle* cir = new Circle(100);
+	Circle* cir2 = new Circle(100, 100);
+	Circle* cir3 = new Circle(100, 100);
+	Circle* cir4 = new Circle(100, 100);
+	Circle* cir5 = new Circle(100, 100);
+
+
+	Vector2 rec3 = rectangle3->GetPosition(0.5f, 0.5f);
+	//Vector2 rec3 = rectangle3->GetPosition(0.5f, 0.5f);
+	//Vector2 rec3 = rectangle3->GetPosition(0.5f, 0.5f);
+	//Vector2 rec3 = rectangle3->GetPosition(0.5f, 0.5f);
+	//Vector2 rec3 = rectangle3->GetPosition(0.5f, 0.5f);
+	
+	cir->SetPosition(rec3.x, rec3.y, 0.5f,0.5f);
+	cir->Draw(renderer);
 
 	SDL_RenderPresent(renderer);
 	SDL_Delay(2000);

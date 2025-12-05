@@ -1,5 +1,6 @@
 #include "Rectangle.h"
 #include "Geometry.h"
+#include <SDL.h>
 void Rectangle::Draw(SDL_Renderer* renderer)
 {
 	//SDL_RenderDrawLine(renderer, m_Posx, m_Posy, m_Posx +m_width, m_Posy);
