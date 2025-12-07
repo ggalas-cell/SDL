@@ -2,7 +2,8 @@
 #include "Geometry.h"
 class Circle: public Geometry
 {
-#define DEFAULT_PRECISION 100
+#define DEFAULT_PRECISION 30
+#define DEFAULT_RADIUS 30
 private:
 
 	/*int radius, precision, centerX, centerY;*/		
