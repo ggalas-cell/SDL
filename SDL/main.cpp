@@ -128,8 +128,8 @@ int main(int arcg, char** argv)
 	//DrawPoint(renderer,color);
 	//DrawHorizontalLine(renderer, 10, 10, 100);	
 	//DrawVerticalLine(renderer,50,50,200);
-	DrawRectangle(renderer,50,50,150,100);
-	DrawCircle(renderer, 200, 200, 200, 2000);
+	//DrawRectangle(renderer,50,50,150,100);
+	//DrawCircle(renderer, 200, 200, 200, 2000);
 	//DrawLine(renderer,200,100,400,300);
 
 	//		// Rectangle : placement 
@@ -180,42 +180,45 @@ int main(int arcg, char** argv)
 	//cir4->Draw(renderer);
 
 	//img a verifier
-	Image* img = new Image(renderer, "..\SDL\image.bmp");
-	img->Draw(renderer);
+	//Image* img = new Image(renderer, "..\SDL\image.bmp");
+	//img->Draw(renderer);
 	//int circlePosx = ;
 	//int circlePosy = ;
 
-	Circle* ci = new Circle(200);
+	Circle* ci = new Circle(50);
 	ci->SetPosition(centerX, centerY, 0.5f, 0.5f);
 	ci->Draw(renderer);
 	bool running = true;
 	InputManager* input = InputManager::Get();
 
-	//while (running)
-	//{
-	//	input->Update();
-	//	SDL_Event event;
-	//	while (SDL_PollEvent(&event))
-	//	{
-	//		if (event.type == SDL_QUIT)
-	//		{
-	//			running = false;
-	//		}
-	//		int speed = 5;
-	//		if (input->IsHeld(SDLK_z)) { centerY -= speed; } //up
-	//		if (input->IsHeld(SDLK_s)) { centerY += speed; } // down
-	//		if (input->IsHeld(SDLK_q)) { centerX -= speed; } // left
-	//		if (input->IsHeld(SDLK_d)) { centerX += speed; } // right
+	while (running)
+	{
+		input->Update();
+		SDL_Event event;
+		while (SDL_PollEvent(&event))
+		{
+			if (event.type == SDL_QUIT)
+			{
+				running = false;
+			}
+			int speed = 5;
+			if (input->IsHeld(SDLK_z)) { centerY -= speed; } //up
+			if (input->IsHeld(SDLK_s)) { centerY += speed; } // down
+			if (input->IsHeld(SDLK_q)) { centerX -= speed; } // left
+			if (input->IsHeld(SDLK_d)) { centerX += speed; } // right
 
-	//		ci->SetPosition(centerX, centerY, 0.5f, 0.5f);
-	//		SDL_RenderClear(renderer);
-	//		SDL_Delay(16);
-	//	}
-	//}
-	//
+			ci->SetPosition(centerX, centerY, 0.5f, 0.5f);
+			ci->Draw(renderer);
+
+			SDL_RenderPresent(renderer);
+			SDL_RenderClear(renderer);
+			SDL_Delay(16);
+		}
+	}
+	
 
 	SDL_RenderPresent(renderer);
-	
+	//SDL_Delay(2000);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 
