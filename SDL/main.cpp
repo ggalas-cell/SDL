@@ -4,6 +4,7 @@
 #include "Rectangle.h"
 #include "Circle.h"
 #include "Image.h"
+#include "InputManager.h"
 
 
 
@@ -127,8 +128,8 @@ int main(int arcg, char** argv)
 	//DrawPoint(renderer,color);
 	//DrawHorizontalLine(renderer, 10, 10, 100);	
 	//DrawVerticalLine(renderer,50,50,200);
-	//DrawRectangle(renderer,50,50,150,100);
-	//DrawCircle(renderer, 200, 200, 200, 2000);
+	DrawRectangle(renderer,50,50,150,100);
+	DrawCircle(renderer, 200, 200, 200, 2000);
 	//DrawLine(renderer,200,100,400,300);
 
 	//		// Rectangle : placement 
@@ -185,6 +186,21 @@ int main(int arcg, char** argv)
 	Circle* ci = new Circle(100);
 	ci->SetPosition(centerx, centery, 0.5f, 0.5f);
 	ci->Draw(renderer);
+
+	bool running = true;
+	SDL_Event event;
+	while (running)
+	{
+		while (SDL_PollEvent(&event))
+		{
+			if (event.type == SDL_QUIT)
+			{
+				running = false;
+			}
+			// input.Update(event); // si tu veux gérer clavier/souris
+		}
+	}
+	
 
 	SDL_RenderPresent(renderer);
 	SDL_Delay(2000);
