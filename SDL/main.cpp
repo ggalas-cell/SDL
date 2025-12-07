@@ -110,8 +110,8 @@ int main(int arcg, char** argv)
 	}
 	int windx = 999;
 	int windy = 799;
-	int centerx = windx / 2;
-	int centery = windy / 2;
+	int centerX = windx / 2;
+	int centerY = windy / 2;
 	SDL_Window* window = SDL_CreateWindow("SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 800, SDL_WINDOW_OPENGL);
 
 
@@ -145,7 +145,7 @@ int main(int arcg, char** argv)
 	//rectangle2->SetPosition(windx-10, 10, 1.f, 0.f);
 	//rectangle2->Draw(renderer);
 
-	//rectangle3->SetPosition(centerx, centery, 0.5f, 0.5f);
+	//rectangle3->SetPosition(centerX, centerY, 0.5f, 0.5f);
 	//rectangle3->Draw(renderer);
 
 	//rectangle4->SetPosition(10, windy-10, 0.f, 1.f);
@@ -180,30 +180,42 @@ int main(int arcg, char** argv)
 	//cir4->Draw(renderer);
 
 	//img a verifier
-	//Image* img = new Image(renderer, "..\SDL\image.bmp");
-	//img->Draw(renderer);
+	Image* img = new Image(renderer, "..\SDL\image.bmp");
+	img->Draw(renderer);
+	//int circlePosx = ;
+	//int circlePosy = ;
 
-	Circle* ci = new Circle(100);
-	ci->SetPosition(centerx, centery, 0.5f, 0.5f);
+	Circle* ci = new Circle(200);
+	ci->SetPosition(centerX, centerY, 0.5f, 0.5f);
 	ci->Draw(renderer);
-
 	bool running = true;
-	SDL_Event event;
-	while (running)
-	{
-		while (SDL_PollEvent(&event))
-		{
-			if (event.type == SDL_QUIT)
-			{
-				running = false;
-			}
-			// input.Update(event); // si tu veux gérer clavier/souris
-		}
-	}
-	
+	InputManager* input = InputManager::Get();
+
+	//while (running)
+	//{
+	//	input->Update();
+	//	SDL_Event event;
+	//	while (SDL_PollEvent(&event))
+	//	{
+	//		if (event.type == SDL_QUIT)
+	//		{
+	//			running = false;
+	//		}
+	//		int speed = 5;
+	//		if (input->IsHeld(SDLK_z)) { centerY -= speed; } //up
+	//		if (input->IsHeld(SDLK_s)) { centerY += speed; } // down
+	//		if (input->IsHeld(SDLK_q)) { centerX -= speed; } // left
+	//		if (input->IsHeld(SDLK_d)) { centerX += speed; } // right
+
+	//		ci->SetPosition(centerX, centerY, 0.5f, 0.5f);
+	//		SDL_RenderClear(renderer);
+	//		SDL_Delay(16);
+	//	}
+	//}
+	//
 
 	SDL_RenderPresent(renderer);
-	SDL_Delay(2000);
+	
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 
