@@ -17,8 +17,8 @@ class InputManager
 	State m_states[SDL_NUM_SCANCODES];
 
 	//BONUS
-	//const Uint8* m_keyboardState;
-	//Uint8 m_previousKeyboardState[SDL_NUM_SCANCODES] = { 0 };
+	const Uint8* m_keyboardState;
+	Uint8 m_previousKeyboardState[SDL_NUM_SCANCODES] = { 0 };
 
 public:
 	static InputManager* Get()
@@ -30,7 +30,7 @@ public:
 	InputManager()
 	{
 		//BONUS
-		//m_keyboardState = SDL_GetKeyboardState(NULL);
+		m_keyboardState = SDL_GetKeyboardState(NULL);
 	}
 
 	void Update()
@@ -70,11 +70,11 @@ public:
 			}
 		}
 
-		//std::memcpy(m_previousKeyboardState, m_keyboardState, SDL_NUM_SCANCODES * sizeof(Uint8));
-		//SDL_PumpEvents();
+		std::memcpy(m_previousKeyboardState, m_keyboardState, SDL_NUM_SCANCODES * sizeof(Uint8));
+		SDL_PumpEvents();
 	}
 
-	/*
+	
 	bool IsDown(SDL_Scancode key)
 	{
 		return m_previousKeyboardState[key] == 0 && m_keyboardState[key] == 1;
@@ -89,7 +89,7 @@ public:
 	{
 		return m_previousKeyboardState[key] == 1 && m_keyboardState[key] == 0;
 	}
-	*/
+	
 
 	bool IsDown(SDL_KeyCode key)
 	{

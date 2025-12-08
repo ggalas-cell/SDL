@@ -188,6 +188,7 @@ int main(int arcg, char** argv)
 	Circle* ci = new Circle(50);
 	ci->SetPosition(centerX, centerY, 0.5f, 0.5f);
 	ci->Draw(renderer);
+	SDL_RenderPresent(renderer);
 	bool running = true;
 	InputManager* input = InputManager::Get();
 
@@ -206,18 +207,20 @@ int main(int arcg, char** argv)
 			if (input->IsHeld(SDLK_s)) { centerY += speed; } // down
 			if (input->IsHeld(SDLK_q)) { centerX -= speed; } // left
 			if (input->IsHeld(SDLK_d)) { centerX += speed; } // right
+			
 
+			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 			ci->SetPosition(centerX, centerY, 0.5f, 0.5f);
 			ci->Draw(renderer);
 
 			SDL_RenderPresent(renderer);
-			SDL_RenderClear(renderer);
-			SDL_Delay(16);
+			//SDL_RenderClear(renderer);
+			SDL_Delay(8);
 		}
 	}
 	
 
-	SDL_RenderPresent(renderer);
+	
 	//SDL_Delay(2000);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
