@@ -7,16 +7,14 @@
 
 class InputManager
 {
-	struct State
+	struct KeyState
 	{
 		bool isDown;
 		bool isHeld;
 		bool isUp;
 	};
 
-	State m_states[SDL_NUM_SCANCODES];
-
-	//BONUS
+	KeyState m_states[SDL_NUM_SCANCODES];
 	const Uint8* m_keyboardState;
 	Uint8 m_previousKeyboardState[SDL_NUM_SCANCODES] = { 0 };
 
@@ -29,7 +27,6 @@ public:
 
 	InputManager()
 	{
-		//BONUS
 		m_keyboardState = SDL_GetKeyboardState(NULL);
 	}
 
@@ -37,7 +34,7 @@ public:
 	{
 		for (int i = 0; i < SDL_NUM_SCANCODES; ++i)
 		{
-			State& state = m_states[i];
+			KeyState& state = m_states[i];
 
 			if (state.isDown)
 				state.isHeld = true;
@@ -58,7 +55,6 @@ public:
 			{
 				if (event.key.repeat)
 					break;
-
 				m_states[event.key.keysym.scancode].isDown = true;
 				break;
 			}

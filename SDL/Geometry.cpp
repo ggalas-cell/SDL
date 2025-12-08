@@ -16,3 +16,9 @@ void Geometry::Resize(int width, int height)
 	m_height = height;
 }
 Vector2 Geometry::GetPosition(float anchorX, float anchorY) const { return Vector2(m_Posx+anchorX*m_width,m_Posy+anchorY*m_height); }
+
+void Geometry::Move(float x, float y)
+{
+	m_Posx += x;
+	m_Posy += y;
+}

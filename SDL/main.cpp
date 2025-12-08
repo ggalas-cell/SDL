@@ -124,7 +124,7 @@ int main(int arcg, char** argv)
 	SDL_Renderer* renderer = SDL_CreateRenderer(window,-1, SDL_RENDERER_PRESENTVSYNC);
 	//Geometry* geometry;
 	//Color color = { 200,140,0,255 };
-	SDL_SetRenderDrawColor(renderer, 200, 140, 0, 255);
+	//SDL_SetRenderDrawColor(renderer, 200, 140, 0, 255);
 	//DrawPoint(renderer,color);
 	//DrawHorizontalLine(renderer, 10, 10, 100);	
 	//DrawVerticalLine(renderer,50,50,200);
@@ -195,28 +195,57 @@ int main(int arcg, char** argv)
 	while (running)
 	{
 		input->Update();
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+		SDL_RenderClear(renderer);
+		SDL_SetRenderDrawColor(renderer, 200, 140, 0, 255);
+		
+		
+		
 		SDL_Event event;
 		while (SDL_PollEvent(&event))
 		{
+			
 			if (event.type == SDL_QUIT)
 			{
 				running = false;
 			}
-			int speed = 5;
-			if (input->IsHeld(SDLK_z)) { centerY -= speed; } //up
-			if (input->IsHeld(SDLK_s)) { centerY += speed; } // down
-			if (input->IsHeld(SDLK_q)) { centerX -= speed; } // left
-			if (input->IsHeld(SDLK_d)) { centerX += speed; } // right
+			InputManager::Get()->Update();
+			if (InputManager::Get()->IsHeld(SDLK_z))
+			{
+				std::cout << "z is held\n";
+			}
+			if(InputManager::Get()->IsHeld(SDLK_s))
+			{
+				std::cout << "s is held\n";
+			}
+			if (InputManager::Get()->IsHeld(SDLK_q))
+			{
+				std::cout << "q is held\n";
+			}
+			if (InputManager::Get()->IsHeld(SDLK_d))
+			{
+				std::cout << "d is held\n";
+			}
 			
 
-			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+			if (input->IsHeld(SDLK_z)) { ci->Move(0.f, -0.1f); } //up
+
+			if (input->IsHeld(SDLK_s)) { ci->Move(0.f, +0.1f); } // down
+
+			if (input->IsHeld(SDLK_q)) { ci->Move(-0.1f, 0.f); } // left
+
+			if (input->IsHeld(SDLK_d)) { ci->Move(0.1f, 0.f); } // right
+
 			ci->SetPosition(centerX, centerY, 0.5f, 0.5f);
 			ci->Draw(renderer);
-
 			SDL_RenderPresent(renderer);
-			//SDL_RenderClear(renderer);
-			SDL_Delay(8);
+			SDL_Delay(2);
 		}
+	
+		
+	
+
+		
 	}
 	
 

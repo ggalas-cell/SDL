@@ -13,7 +13,7 @@ public:
 
 	void SetPosition(const Vector2& value, float anchorX, float anchorY);
 	void SetPosition(int x,int y, float anchorX,float anchorY);
-
+	void Move(float x, float y);
 	Vector2 GetPosition(float anchorX, float anchorY)const ;
 };
 
